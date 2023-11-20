@@ -1,71 +1,82 @@
-# Getting Started with Create React App
+# Flask Text Generation API with ReactJS Integration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains a simple Flask web application that serves as an API for text generation using the Llama 2 model. The application uses the Hugging Face Transformers library and enables Cross-Origin Resource Sharing (CORS) to allow requests from different domains. Additionally, it includes a ReactJS component that provides a user-friendly interface for interacting with the Flask API.
 
-## Available Scripts
+## Flask API
 
-In the project directory, you can run:
+### Setup
 
-### `npm start`
+1. Install the required packages by running:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    ```bash
+    pip install flask transformers flask-cors
+    ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Make sure to have the Hugging Face Transformers library installed. You can install it using:
 
-### `npm test`
+    ```bash
+    pip install transformers
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Usage
 
-### `npm run build`
+1. Run the Flask application:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    python your_app_name.py
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Send a POST request to the `/generate_text` endpoint with a JSON payload containing the `input_prompt`. For example:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    curl -X POST -H "Content-Type: application/json" -d '{"input_prompt": "Once upon a time"}' http://localhost:5000/generate_text
+    ```
 
-### `npm run eject`
+3. The API will respond with the generated text as JSON:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    ```json
+    {"generated_text": "Once upon a time, in a land far, far away..."}
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Endpoint
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **`/generate_text` (POST):**
+  - **Input:**
+    - JSON payload with the key `input_prompt` containing the text prompt for text generation.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+      ```json
+      {"input_prompt": "Once upon a time"}
+      ```
 
-## Learn More
+  - **Output:**
+    - JSON response with the key `generated_text` containing the generated text.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+      ```json
+      {"generated_text": "Once upon a time, in a land far, far away..."}
+      ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ReactJS Integration
 
-### Code Splitting
+To integrate this Flask API with a ReactJS frontend, follow the steps below:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### ReactJS Setup
 
-### Analyzing the Bundle Size
+1. Install required dependencies in your React project:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    ```bash
+    npm install
+    ```
 
-### Making a Progressive Web App
+2. Create a new component or modify an existing one. For example, create a file named `YourComponent.js` and use the provided React component.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. Import and use the `YourComponent` in your main application file (e.g., `App.js`).
 
-### Advanced Configuration
+4. Style your component by creating a CSS file (e.g., `YourComponent.css`) and importing it into your React component.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+5. Run your React application:
 
-### Deployment
+    ```bash
+    npm start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# demo_yt_chatbot
+Now, your React component should interact with the Flask Text Generation API. The input prompt is sent to the API, and the generated text is displayed in the response box. Feel free to customize the React component and styles according to your project requirements.
